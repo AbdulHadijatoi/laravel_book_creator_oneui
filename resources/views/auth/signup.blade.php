@@ -25,7 +25,7 @@
                 Create Account
               </h1>
               <p class="fw-medium text-muted">
-                Existing user?, please <a href="{{url('/signin')}}">sign in</a>.
+                Existing user?, please <a href="{{url('/login')}}">Log in</a>.
             </p>
             </div>
             <!-- END Header -->
@@ -35,24 +35,37 @@
             <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
             <div class="row g-0 justify-content-center">
               <div class="col-sm-8 col-xl-4">
-                <form class="js-validation-signup" action="be_pages_auth_all.html" method="POST">
+                <form class="js-validation-signup" action="{{ route('register_user') }}" method="POST">
+                  @csrf
                   <div class="mb-4">
-                    <input type="email" class="form-control form-control-lg form-control-alt py-3" id="signup_email" name="signup_email" placeholder="Email">
+                    <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="Email">
+                    @if ($errors->has('email'))
+                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                    @endif
                   </div>
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-lg form-control-alt py-3" id="signup_password" name="signup_password" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Password">
+                    @if ($errors->has('password'))
+                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
                   </div>
                   <div class="mb-4">
-                    <input type="password" class="form-control form-control-lg form-control-alt py-3" id="signup_password-confirm" name="signup_password-confirm" placeholder="Confirm Password">
+                    <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password_confirm" name="password_confirm" placeholder="Confirm Password">
+                    @if ($errors->has('password_confirm'))
+                      <span class="text-danger">{{ $errors->first('password_confirm') }}</span>
+                    @endif
                   </div>
                   <div class="mb-4">
                     <div class="d-md-flex align-items-md-center justify-content-md-between">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="signup_terms" name="signup_terms">
-                        <label class="form-check-label" for="signup_terms">I agree to Terms &amp; Conditions</label>
+                        <input class="form-check-input" type="checkbox" value="" id="terms" name="terms">
+                        <label class="form-check-label" for="terms">I agree to Terms &amp; Conditions</label><br>
+                        @if ($errors->has('terms'))
+                          <span class="text-danger">{{ $errors->first('terms') }}</span>
+                        @endif
                       </div>
                       <div class="py-2">
-                        <a class="fs-sm fw-medium" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#one-signup_terms">View Terms</a>
+                        <a class="fs-sm fw-medium" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#one-terms">View Terms</a>
                       </div>
                     </div>
                   </div>
@@ -62,6 +75,12 @@
                     </button>
                   </div>
                 </form>
+                <br/>
+                @if(session()->has('success'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('success') }}
+                    </div>
+                @endif
               </div>
             </div>
             <!-- END Sign Up Form -->
@@ -88,7 +107,7 @@
     </div>
 
     <!-- Terms Modal -->
-    <div class="modal fade" id="one-signup_terms" tabindex="-1" role="dialog" aria-labelledby="one-signup_terms" aria-hidden="true">
+    <div class="modal fade" id="one-terms" tabindex="-1" role="dialog" aria-labelledby="one-terms" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
         <div class="modal-content">
           <div class="block block-rounded block-transparent mb-0">

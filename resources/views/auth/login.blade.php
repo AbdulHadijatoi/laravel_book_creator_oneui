@@ -1,6 +1,6 @@
 @extends('layouts.simple')
 
-@section('title','Sign in')
+@section('title','Log in')
 
 @section('content')
     <!-- Page Content -->
@@ -18,10 +18,10 @@
                     <!-- Header -->
                     <div class="text-center mb-5">
                     <h1 class="fw-bold mb-2">
-                        Sign In
+                        Log In
                     </h1>
                     <p class="fw-medium text-muted">
-                        Welcome, please signin or <a href="{{url('/signup')}}">sign up</a> for a new account.
+                        Welcome, please login or <a href="{{url('/signup')}}">sign up</a> for a new account.
                     </p>
                     </div>
                     <!-- END Header -->
@@ -31,25 +31,37 @@
                     <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
                     <div class="row g-0 justify-content-center">
                     <div class="col-sm-8 col-xl-4">
-                        <form class="js-validation-signin" action="be_pages_auth_all.html" method="POST">
-                        <div class="mb-4">
-                            <input type="text" class="form-control form-control-lg form-control-alt py-3" id="signin_username" name="signin_username" placeholder="Username">
-                        </div>
-                        <div class="mb-4">
-                            <input type="password" class="form-control form-control-lg form-control-alt py-3" id="signin_password" name="signin_password" placeholder="Password">
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <div>
-                            <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1" href="op_auth_reminder3.html">
-                                Forgot Password?
-                            </a>
+                        <form class="js-validation-login" method="POST" action="{{ route('login_user') }}">
+                            @csrf
+                            <div class="mb-4">
+                                <input type="email" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="email">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
-                            <div>
-                            <button type="submit" class="btn btn-lg btn-alt-primary">
-                                <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Sign In
-                            </button>
+                            <div class="mb-4">
+                                <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Password">
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
-                        </div>
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1" href="op_auth_reminder3.html">
+                                    Forgot Password?
+                                </a>
+                                </div>
+                                <div>
+                                <button type="submit" class="btn btn-lg btn-alt-primary">
+                                    <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Log In
+                                </button>
+                                </div>
+                            </div>
+                            @if(session()->has('success'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
                         </form>
                     </div>
                     </div>
