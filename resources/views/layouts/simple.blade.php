@@ -4,15 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>
-            @if(View::hasSection('title'))
-                @yield('title')
-            @endif    
-            | Book Creator
-        </title>
+        <title>OneUI - Bootstrap 5 Admin Template &amp; UI Framework</title>
 
-        <meta name="description" content="Book creator app created by Abdul Hadi">
-        <meta name="author" content="H∆DI">
+        <meta name="description" content="OneUI - Bootstrap 5 Admin Template &amp; UI Framework created by pixelcave and published on Themeforest">
+        <meta name="author" content="pixelcave">
         <meta name="robots" content="noindex, nofollow">
 
         <!-- CSRF Token -->

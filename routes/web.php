@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 // Example Routes
 Route::view('/', 'account/signin');
-// Route::view('/login', '/landing');
-Route::view('/signin', 'account/signin');
-Route::view('/signup', 'account/signup');
 Route::match(['get', 'post'], '/dashboard', function(){
     return view('dashboard');
 });
